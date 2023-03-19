@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук
+      визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+    </p>
+    <script>
+      // Масив імен
+      let names = ["Katya", "Tom", "Olga", "Victoriya", "Elvira", "Stepan"]
+      // Фунція сортування
+      function nameSort(arr) {
+        let key, number
+        for (let i = 1; i < arr.length; i++) {
+          key = arr[i]
+          num = i - 1
+          while (i >= 0 && arr[number] > key) {
+            arr[number + 1] = arr[number]
+            number -= 1
+          }
+          arr[number + 1] = key
+        }
+        return arr
+      }
+      // Фунція сортування
+      function search(arr, el) {
+        let start = 0
+        let end = arr.length - 1
+        while (start <= end) {
+          let middle = Math.floor((start + end) / 2)
+          if (arr[middle] === el) return middle
+          if (arr[middle] < el) start = middle + 1
+          if (arr[middle] > el) end = middle - 1
+        }
+        return -1
+      }
+      let sort = nameSort(names)
+      let elIndex = search(sort, "Olga")
+      // Виводимо результат
+      document.write(`${sort}<br>`)
+      if (elIndex !== -1) document.write(`індекс під номером - ${elIndex}`)
+      else document.write("немає індекса")
+    </script>
+  </body>
+</html>

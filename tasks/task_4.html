@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Для розглянутих методів сортування спробувати вивести етапи сортування
+      шляхом виведення відповідних таблиць за зразком.
+    </p>
+    <img src="../img/image.png" alt="img" />
+    <p>
+      Тобто кожного разу після обміну елементів вивести поточний стан масиву на
+      екран.
+    </p>
+    <script>
+      // рандомний масив
+      // ===============================1 частина===================
+      function getRandom(minValue, MaxValue) {
+        return minValue + Math.floor(Math.random() * (MaxValue - minValue + 1))
+      }
+      function getRandomNumber(array, minValue, MaxValue) {
+        arr = []
+        for (let i = 0; i < array; i++) {
+          const randNumb = getRandom(minValue, MaxValue)
+          arr.push(randNumb)
+        }
+        return arr
+      }
+      let randomNumber = getRandomNumber(5, 1, 50)
+
+      // сортування
+      let changes,
+        count = 0
+      do {
+        changes = false
+        for (let i = 1; i < randomNumber.length; i++) {
+          if (randomNumber[i - 1] > randomNumber[i]) {
+            let tmp = randomNumber[i - 1]
+            randomNumber[i - 1] = randomNumber[i]
+            randomNumber[i] = tmp
+            changes = true
+            count++
+            document.write(`<p>[${randomNumber}]</p>`)
+          }
+        }
+      } while (changes)
+      document.write(`Кількість переміщень - ${count}<br>`)
+      // ===============================2 частина===================
+      // сортування
+      let leftIndex = 0
+      let rightIndex = randomNumber.length - 1
+
+      while (leftIndex < rightIndex) {
+        for (let i = leftIndex; i < rightIndex; i++) {
+          if (randomNumber[i] > randomNumber[i + 1]) {
+            let tmp = randomNumber[i]
+            randomNumber[i] = randomNumber[i + 1]
+            randomNumber[i + 1] = tmp
+            count++
+            document.write(`<p>[${randomNumber}]</p>`)
+          }
+        }
+        rightIndex--
+        for (let i = rightIndex; i > leftIndex; i--) {
+          if (randomNumber[i] < randomNumber[i + 1]) {
+            let tmp = randomNumber[i]
+            randomNumber[i] = randomNumber[i - 1]
+            randomNumber[i - 1] = tmp
+            count++
+            document.write(`<p>[${randomNumber}]</p>`)
+          }
+        }
+        leftIndex++
+      }
+      document.write(`Кількість переміщень - ${count}<br>`)
+      // ===============================3 частина===================
+
+      // сортування
+      let key, i
+      for (let k = 1; k < randomNumber.length; k++) {
+        key = randomNumber[k]
+        i = k - 1
+        while (i >= 0 && randomNumber[i] > key) {
+          randomNumber[i + 1] = randomNumber[i]
+          i = i - 1
+          count++
+          document.write(`<p>[${randomNumber}]</p>`)
+        }
+        randomNumber[i + 1] = key
+      }
+      document.write(`Кількість переміщень - ${count}<br>`)
+    </script>
+  </body>
+</html>

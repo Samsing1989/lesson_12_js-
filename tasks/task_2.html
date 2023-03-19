@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під
+      час сортування змішуванням.
+    </p>
+
+    <script>
+      // Генерація рандомного масиву
+      function getRandom(minValue, maxValue) {
+        return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+      function getRandomNumber(array, minValue, maxValue) {
+        arr = []
+        for (let i = 0; i < array; i++) {
+          const randNum = getRandom(minValue, maxValue)
+          arr.push(randNum)
+        }
+        return arr
+      }
+      let randomNumber = getRandomNumber(30, 0, 50)
+      document.write(`масив випадкових чисел - ${randomNumber}<br>`)
+
+      let leftIndex = 0
+      let rightIndex = randomNumber.length - 1
+      let count = 0
+      // Сортування
+      while (leftIndex < rightIndex) {
+        for (let i = leftIndex; i < rightIndex; i++) {
+          if (randomNumber[i] > randomNumber[i + 1]) {
+            let tmp = randomNumber[i]
+            randomNumber[i] = randomNumber[i + 1]
+            randomNumber[i + 1] = tmp
+            count++
+          }
+        }
+        rightIndex--
+        for (let i = rightIndex; i > leftIndex; i--) {
+          if (randomNumber[i] < randomNumber[i - 1]) {
+            let tmp = randomNumber[i]
+            randomNumber[i] = randomNumber[i - 1]
+            randomNumber[i - 1] = tmp
+            count++
+          }
+        }
+        leftIndex++
+      }
+      // Виводимо результат
+      document.write(`Обмінів під
+      час сортування змішуванням ${count}`)
+    </script>
+  </body>
+</html>
